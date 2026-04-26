@@ -1,4 +1,5 @@
 package com.example;
+
 public class ProjectManagement {
 
     private int projectId;
@@ -14,32 +15,42 @@ public class ProjectManagement {
         this.teamSize = teamSize;
     }
 
-    // Create Project
+    // ================= CREATE PROJECT =================
     public String createProject() {
-        if (projectName == null || projectName.isEmpty()) {
+
+        if (projectName == null || projectName.trim().isEmpty()) {
             throw new IllegalArgumentException("Project name cannot be empty");
         }
+
         return projectName;
     }
 
-    // Update Project Status
+    // ================= UPDATE STATUS =================
     public String updateProjectStatus(String newStatus) {
-        this.status = newStatus;
-        return this.status;
-    }
 
-    // Assign Team Members
-    public int assignTeamMembers(int members) {
-        if (members < 0) {
-            throw new IllegalArgumentException("Invalid team size");
+        // Allow null (as per your test case)
+        if (newStatus == null) {
+            this.status = null;
+            return null;
         }
-        this.teamSize = members;
-        return this.teamSize;
+
+        this.status = newStatus;
+        return status;
     }
 
-    // Getters
     public String getStatus() {
         return status;
+    }
+
+    // ================= TEAM MANAGEMENT =================
+    public int assignTeamMembers(int teamSize) {
+
+        if (teamSize < 0) {
+            throw new IllegalArgumentException("Team size cannot be negative");
+        }
+
+        this.teamSize = teamSize;
+        return this.teamSize;
     }
 
     public int getTeamSize() {
